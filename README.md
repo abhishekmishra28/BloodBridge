@@ -1,228 +1,202 @@
-# 🩸 BloodBridge : A Blood Donation Management System (MERN)
+# 🩸 BloodBridge — Blood Donation Management System
 
-A full-stack Blood Donation Management System designed using the MERN stack.
-This system connects donors, recipients, and hospitals efficiently with role-based access.
-
----
-
-## 🚀 Features
-
-### 🔐 Authentication & Authorization
-
-* JWT-based login system
-* Role-based access:
-
-  * Admin
-  * User
-* Protected routes
+A full-stack MERN application connecting blood donors, recipients, and hospitals across India.
 
 ---
 
-## 👨‍💼 Admin Panel
+## 🚀 Quick Start
 
-* 📊 Dashboard Analytics
+### Prerequisites
+- Node.js 18+
+- MongoDB (local or MongoDB Atlas)
+- npm
 
-  * Total Users
-  * Total Donations
-  * Blood Requests
-  * Completed Donations
+### 1. Clone & Setup
 
-* 👥 User Management
-
-  * View users
-  * Delete users
-  * Suspend / Block access
-
-* 🏥 Hospital Management
-
-  * Add hospital
-  * Update hospital details
-  * View partnered hospitals
-
-* ⏰ Slot Management
-
-  * Create slots (date + time)
-  * Update/Delete slots
-
-* 📅 Booking Management
-
-  * View all bookings
-  * Approve/Reject bookings
-
-* 🩸 Requests Management
-
-  * Handle blood requests (Urgent/Normal/Critical)
-
----
-
-## 👤 User Panel
-
-* 🌍 City Selection (for filtering)
-
-### Features:
-
-* ❤️ Donate Blood
-
-  * Book slot (date & time)
-  * Contact admin for urgent donation
-
-* 🆘 Request Blood
-
-  * Select urgency level
-  * Choose city
-  * Specify required date
-
-* 🔍 Search Donors
-
-  * Filter by city
-
-* 🏥 Hospitals
-
-  * View nearby hospitals
-  * Book donation slots
-
-* 👤 Profile
-
-  * Update personal details
-
-* 🔔 Notifications
-
-  * Booking updates
-  * Request updates
-
----
-
-## ⚙️ Business Logic
-
-* 🚫 Donation Restriction:
-
-  * A user cannot donate blood again for **3 months** after last donation.
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend:
-
-* React.js
-* React Router
-* Axios
-* Context API / Redux
-* Tailwind CSS / Bootstrap
-
-### Backend:
-
-* Node.js
-* Express.js
-
-### Database:
-
-* MongoDB (Mongoose)
-
----
-
-## 📂 Project Structure
-
-```
-/client      → React frontend
-/server      → Express backend
-  /models
-  /routes
-  /controllers
-  /middleware
+```bash
+git clone <repo-url>
+cd bloodbridge
 ```
 
----
+### 2. Backend
 
-## 🔑 API Modules
-
-* Auth APIs
-* User APIs
-* Admin APIs
-* Hospital APIs
-* Slot APIs
-* Booking APIs
-* Request APIs
-
----
-
-## 🧪 Demo Credentials
-
-```
-Admin:
-Email: admin@example.com
-Password: password123
-
-User:
-Email: user@example.com
-Password: password123
-```
-
----
-
-## ⚡ Installation & Setup
-
-### 1️⃣ Clone Repository
-
-```
-git clone https://github.com/your-username/blood-donation-system.git
-cd blood-donation-system
-```
-
-### 2️⃣ Backend Setup
-
-```
+```bash
 cd server
 npm install
+
+# Create .env (already included with defaults)
+# Edit MONGO_URI if using Atlas
+
+npm run seed    # Seed demo data (run once)
+npm run dev     # Start on http://localhost:5000
 ```
 
-Create `.env` file:
+### 3. Frontend
 
-```
-PORT=5000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
-```
-
-Run backend:
-
-```
-npm run dev
-```
-
----
-
-### 3️⃣ Frontend Setup
-
-```
+```bash
 cd client
 npm install
-npm start
+npm start       # Start on http://localhost:3000
 ```
 
 ---
 
-## 📊 Future Enhancements
+## 🔑 Demo Credentials
 
-* Real-time notifications (Socket.io)
-* AI-based donor matching
-* Mobile app version
-* OTP verification
-
----
-
-## 🤝 Contribution
-
-Contributions are welcome! Feel free to fork and submit a PR.
+| Role  | Email                | Password    |
+|-------|----------------------|-------------|
+| Admin | admin@example.com    | password123 |
+| User  | user@example.com     | password123 |
 
 ---
 
-## 📜 License
+## 🗂️ Project Structure
 
-This project is for educational purposes (college project).
+```
+bloodbridge/
+├── server/
+│   ├── index.js              ← Express app entry
+│   ├── seed.js               ← DB seed script
+│   ├── .env                  ← Environment variables
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Hospital.js
+│   │   ├── Slot.js
+│   │   ├── Booking.js
+│   │   ├── Request.js
+│   │   └── Notification.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── adminController.js
+│   │   ├── userController.js
+│   │   ├── hospitalController.js
+│   │   ├── slotController.js
+│   │   ├── bookingController.js
+│   │   ├── requestController.js
+│   │   └── notificationController.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── admin.js
+│   │   ├── users.js
+│   │   ├── hospitals.js
+│   │   ├── slots.js
+│   │   ├── bookings.js
+│   │   ├── requests.js
+│   │   └── notifications.js
+│   └── middleware/
+│       └── auth.js           ← JWT protect + adminOnly
+│
+├── client/
+│   ├── public/index.html
+│   └── src/
+│       ├── App.js            ← Router + protected routes
+│       ├── index.js
+│       ├── context/
+│       │   └── AuthContext.js
+│       ├── utils/
+│       │   ├── api.js        ← Axios instance
+│       │   └── helpers.js    ← Formatters, constants
+│       ├── styles/
+│       │   └── global.css    ← Full design system
+│       └── pages/
+│           ├── Landing.js
+│           ├── auth/
+│           │   └── AuthPage.js
+│           ├── admin/
+│           │   ├── AdminLayout.js
+│           │   ├── AdminDashboard.js  ← Charts + analytics
+│           │   ├── AdminUsers.js
+│           │   ├── AdminHospitals.js
+│           │   ├── AdminSlots.js
+│           │   ├── AdminBookings.js
+│           │   └── AdminRequests.js
+│           └── user/
+│               ├── UserLayout.js
+│               ├── UserDashboard.js
+│               ├── DonatePage.js      ← Slot booking flow
+│               ├── RequestPage.js
+│               ├── SearchDonors.js
+│               ├── HospitalsPage.js
+│               ├── ProfilePage.js
+│               └── NotificationsPage.js
+│
+├── API_DOCS.md
+└── README.md
+```
+
+---
+
+## ✨ Features
+
+### Admin Panel
+- 📊 Dashboard with Recharts (bar + pie charts)
+- 👥 User management — view, suspend, block, delete
+- 🏥 Hospital CRUD — add/edit/delete with blood group selection
+- 📅 Slot management — create slots per hospital + time
+- 📋 Booking management — approve/reject with admin notes
+- 🆘 Blood requests — urgency-filtered view, status management
+
+### User Panel
+- 🩸 Donate — city search → slot selection → booking confirmation
+- 🆘 Request — blood request form with urgency selector
+- 🔍 Search Donors — filter by city + blood group
+- 🏥 Hospitals — browse + book slots inline
+- 👤 Profile — edit personal details
+- 🔔 Notifications — real-time updates (30s polling)
+
+### Business Logic
+- 🚫 3-Month Donation Restriction enforced at API + UI level
+- 🔐 JWT auth with role-based protected routes
+- 📧 Notifications auto-created on booking/request events
+- 💊 Slot capacity management with atomic counters
+
+---
+
+## 🛠 Tech Stack
+
+| Layer     | Technology |
+|-----------|-----------|
+| Frontend  | React 18, React Router v6, Recharts, react-hot-toast |
+| Backend   | Node.js, Express.js |
+| Database  | MongoDB, Mongoose |
+| Auth      | JWT (jsonwebtoken, bcryptjs) |
+| Styling   | Pure CSS (design system in global.css) |
+| Fonts     | Sora + DM Sans (Google Fonts) |
+
+---
+
+## 🌐 API Endpoints Summary
+
+See `API_DOCS.md` for full documentation.
+
+| Method | Route | Access |
+|--------|-------|--------|
+| POST | /api/auth/register | Public |
+| POST | /api/auth/login | Public |
+| GET | /api/auth/me | User |
+| GET | /api/admin/dashboard | Admin |
+| GET | /api/admin/users | Admin |
+| PATCH | /api/admin/users/:id/status | Admin |
+| DELETE | /api/admin/users/:id | Admin |
+| GET/POST | /api/hospitals | User/Admin |
+| PUT/DELETE | /api/hospitals/:id | Admin |
+| GET/POST | /api/slots | User/Admin |
+| GET | /api/bookings/my | User |
+| POST | /api/bookings | User |
+| GET | /api/bookings | Admin |
+| PATCH | /api/bookings/:id/status | Admin |
+| GET/POST | /api/requests | User/Admin |
+| PATCH | /api/requests/:id/status | Admin |
+| GET/PATCH | /api/notifications | User |
 
 ---
 
 ## 👨‍💻 Author
 
-Abhishek Kumar Mishra
+**Abhishek Kumar Mishra**
+
+---
+
+## 📜 License
+
+Educational/College Project — BloodBridge 2024
