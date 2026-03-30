@@ -8,6 +8,10 @@ dotenv.config();
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("BloodBridge API Running 🚀");
+});
+
 // ── Middleware ──────────────────────────────────────────────────────────────
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
