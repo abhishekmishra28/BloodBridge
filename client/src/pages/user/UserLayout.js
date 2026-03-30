@@ -45,13 +45,46 @@ export default function UserLayout() {
       )}
 
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="logo">
-          <div className="logo-icon">🩸</div>
-          <div>
-            <div className="logo-text">BloodBridge</div>
-            <div className="logo-sub">{user?.city || 'India'}</div>
-          </div>
-        </div>
+        <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+  
+  {/* Logo Image */}
+  <img 
+    src="/logo.png" 
+    alt="logo"
+    style={{
+      width: '36px',
+      height: '36px',
+      objectFit: 'contain'
+    }}
+  />
+
+  <div>
+    {/* Styled Name */}
+    <div 
+      className="logo-text"
+      style={{
+        fontWeight: 800,
+        fontFamily: 'Sora, sans-serif',
+        letterSpacing: '0.5px'
+      }}
+    >
+      <span style={{ color: '#e63946' }}>BLOOD</span>
+      <span style={{ color: '#ffffff' }}>BRIDGE</span>
+    </div>
+
+    {/* Sub text */}
+    <div 
+      className="logo-sub"
+      style={{
+        fontSize: '12px',
+        color: '#aaa'
+      }}
+    >
+      Admin Panel
+    </div>
+  </div>
+
+</div>
 
         <nav className="nav">
           <div className="nav-section-label">Menu</div>
@@ -98,6 +131,7 @@ export default function UserLayout() {
         </div>
 
         <div className="sidebar-footer">
+
           <div className="user-pill">
             <div className="avatar">{getInitials(user?.name)}</div>
             <div>
@@ -105,13 +139,43 @@ export default function UserLayout() {
               <div className="user-pill-role">{user?.bloodGroup || 'No blood group'}</div>
             </div>
           </div>
+
+          {/* Divider */}
+          <div style={{
+            height: '1px',
+            background: 'rgba(255,255,255,0.08)',
+            margin: '12px 0'
+          }} />
+
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="btn btn-ghost btn-sm"
-            style={{ width: '100%', marginTop: '8px', color: 'var(--text-muted)' }}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              padding: '10px',
+              borderRadius: '10px',
+              border: '1px solid rgba(230,57,70,0.25)',
+              background: 'rgba(230,57,70,0.08)',
+              color: '#e63946',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(230,57,70,0.18)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(230,57,70,0.08)';
+            }}
           >
-            🚪 Logout
+            <span style={{ fontSize: '16px' }}>🚪</span>
+            Logout
           </button>
+
         </div>
       </aside>
 
