@@ -13,23 +13,42 @@ const getProfile = async (req, res) => {
 // @route PUT /api/users/profile
 const updateProfile = async (req, res) => {
   try {
+    const user = await User.findById(req.user._id);
+
+    // 🔐 PROTECT DEMO USER
+    if (user.isDemo) {
+      return res.status(403).json({
+        success: false,
+        message: "Demo user profile cannot be modified"
+      });
+    }
+
     const { name, phone, city, state, bloodGroup, age, gender } = req.body;
-    const user = await User.findByIdAndUpdate(
+
+    const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { name, phone, city, state, bloodGroup, age, gender },
       { new: true, runValidators: true }
     ).select('-password');
-    res.json({ success: true, message: 'Profile updated', user });
+
+    res.json({ success: true, message: 'Profile updated', user: updatedUser });
+
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// @route GET /api/users/donors?city=&bloodGroup=
+// @route GET /api/users/donors
 const searchDonors = async (req, res) => {
   try {
     const { city, bloodGroup } = req.query;
-    const query = { role: 'user', status: 'active' };
+
+    const query = {
+      role: 'user',
+      status: 'active',
+      isDemo: { $ne: true } // 👈 optional: hide demo user
+    };
+
     if (city) query.city = new RegExp(city, 'i');
     if (bloodGroup) query.bloodGroup = bloodGroup;
 
@@ -38,6 +57,7 @@ const searchDonors = async (req, res) => {
       .limit(50);
 
     res.json({ success: true, donors });
+
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

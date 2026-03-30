@@ -71,17 +71,6 @@ export default function UserLayout() {
       <span style={{ color: '#e63946' }}>BLOOD</span>
       <span style={{ color: '#ffffff' }}>BRIDGE</span>
     </div>
-
-    {/* Sub text */}
-    <div 
-      className="logo-sub"
-      style={{
-        fontSize: '12px',
-        color: '#aaa'
-      }}
-    >
-      Admin Panel
-    </div>
   </div>
 
 </div>
