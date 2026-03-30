@@ -1,7 +1,7 @@
 
 
 <h1 align="center">
-  <img src="client/public/logo.png" width="40" style="vertical-align: middle; margin-right: 10px;" />
+  <img src="client/public/logo.png" width="60" style="vertical-align: middle; margin-right: 10px;" />
   BloodBridge — Blood Donation Management System
 </h1>
 
