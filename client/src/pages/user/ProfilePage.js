@@ -23,7 +23,7 @@ export default function ProfilePage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.put('/users/profile', form);
+      await api.put('/api/users/profile', form);
       await refreshUser();
       toast.success('Profile updated successfully!');
     } catch (err) { toast.error(err.response?.data?.message || 'Update failed'); }

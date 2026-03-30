@@ -13,7 +13,7 @@ export default function SearchDonors() {
   const search = async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/users/donors', { params: { city, bloodGroup } });
+      const { data } = await api.get('/api/users/donors', { params: { city, bloodGroup } });
       setDonors(data.donors);
       setSearched(true);
       if (data.donors.length === 0) toast('No donors found for these filters', { icon: 'ℹ️' });

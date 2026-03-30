@@ -27,10 +27,10 @@ function HospitalModal({ hospital, onClose, onSaved }) {
     setLoading(true);
     try {
       if (isEdit) {
-        await api.put(`/hospitals/${hospital._id}`, form);
+        await api.put(`/api/hospitals/${hospital._id}`, form);
         toast.success('Hospital updated');
       } else {
-        await api.post('/hospitals', form);
+        await api.post('/api/hospitals', form);
         toast.success('Hospital added');
       }
       onSaved();
@@ -131,7 +131,7 @@ export default function AdminHospitals() {
   const fetchHospitals = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/hospitals', { params: { city: cityFilter, limit: 100 } });
+      const { data } = await api.get('/api/hospitals', { params: { city: cityFilter, limit: 100 } });
       setHospitals(data.hospitals);
     } catch { toast.error('Failed to load hospitals'); }
     finally { setLoading(false); }
@@ -142,7 +142,7 @@ export default function AdminHospitals() {
   const deleteHospital = async (id, name) => {
     if (!window.confirm(`Remove ${name}?`)) return;
     try {
-      await api.delete(`/hospitals/${id}`);
+      await api.delete(`/api/hospitals/${id}`);
       toast.success('Hospital removed');
       fetchHospitals();
     } catch { toast.error('Failed'); }

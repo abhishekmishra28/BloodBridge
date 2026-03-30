@@ -11,7 +11,7 @@ function RequestModal({ request, onClose, onSaved }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await api.patch(`/requests/${request._id}/status`, { status, adminNote });
+      await api.patch(`/api/requests/${request._id}/status`, { status, adminNote });
       toast.success('Request updated');
       onSaved();
     } catch { toast.error('Failed'); }
@@ -79,7 +79,7 @@ export default function AdminRequests() {
   const fetchRequests = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/requests', { params: { status: statusFilter, urgency: urgencyFilter, limit: 50 } });
+      const { data } = await api.get('/api/requests', { params: { status: statusFilter, urgency: urgencyFilter, limit: 50 } });
       setRequests(data.requests);
       setTotal(data.total);
     } catch { toast.error('Failed to load requests'); }

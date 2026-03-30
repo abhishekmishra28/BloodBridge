@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('bb_token');
       if (!token) { setLoading(false); return; }
       try {
-        const { data } = await api.get('/auth/me');
+        const { data } = await api.get('/api/auth/me');
         setUser(data.user);
         localStorage.setItem('bb_user', JSON.stringify(data.user));
       } catch {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = useCallback(async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
+    const { data } = await api.post('/api/auth/login', { email, password });
     localStorage.setItem('bb_token', data.token);
     localStorage.setItem('bb_user', JSON.stringify(data.user));
     setUser(data.user);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const register = useCallback(async (formData) => {
-    const { data } = await api.post('/auth/register', formData);
+    const { data } = await api.post('/api/auth/register', formData);
     localStorage.setItem('bb_token', data.token);
     localStorage.setItem('bb_user', JSON.stringify(data.user));
     setUser(data.user);
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const refreshUser = useCallback(async () => {
-    const { data } = await api.get('/auth/me');
+    const { data } = await api.get('/api/auth/me');
     setUser(data.user);
     localStorage.setItem('bb_user', JSON.stringify(data.user));
   }, []);

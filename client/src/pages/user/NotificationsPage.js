@@ -27,7 +27,7 @@ export default function NotificationsPage() {
   const fetchNotifications = async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/notifications');
+      const { data } = await api.get('/api/notifications');
       setNotifications(data.notifications);
       setUnreadCount(data.unreadCount);
     } catch { toast.error('Failed to load notifications'); }
@@ -38,7 +38,7 @@ export default function NotificationsPage() {
 
   const markAllRead = async () => {
     try {
-      await api.patch('/notifications/read-all');
+      await api.patch('/api/notifications/read-all');
       toast.success('All notifications marked as read');
       fetchNotifications();
     } catch { toast.error('Failed'); }

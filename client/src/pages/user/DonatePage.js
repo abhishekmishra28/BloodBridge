@@ -19,14 +19,14 @@ export default function DonatePage() {
 
   // Load my bookings
   useEffect(() => {
-    api.get('/bookings/my').then(r => setBookings(r.data.bookings));
+    api.get('/api/bookings/my').then(r => setBookings(r.data.bookings));
   }, []);
 
   const searchSlots = async () => {
     if (!city) { toast.error('Please select a city'); return; }
     setLoading(true);
     try {
-      const { data } = await api.get('/slots', { params: { city, date } });
+      const { data } = await api.get('/api/slots', { params: { city, date } });
       setSlots(data.slots);
       setStep(2);
       if (data.slots.length === 0) toast('No slots found for selected filters', { icon: 'ℹ️' });
@@ -38,14 +38,14 @@ export default function DonatePage() {
     if (!selectedSlot) return;
     setBookingLoading(true);
     try {
-      await api.post('/bookings', { slotId: selectedSlot._id, bloodGroup, notes });
+      await api.post('/api/bookings', { slotId: selectedSlot._id, bloodGroup, notes });
       toast.success('Booking submitted! Awaiting admin approval 🎉');
       await refreshUser();
       setStep(1);
       setSelectedSlot(null);
       setSlots([]);
       // Refresh bookings
-      const r = await api.get('/bookings/my');
+      const r = await api.get('/api/bookings/my');
       setBookings(r.data.bookings);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Booking failed');

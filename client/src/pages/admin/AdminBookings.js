@@ -11,7 +11,7 @@ function ActionModal({ booking, onClose, onSaved }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await api.patch(`/bookings/${booking._id}/status`, { status, adminNote });
+      await api.patch(`/api/bookings/${booking._id}/status`, { status, adminNote });
       toast.success(`Booking ${status}`);
       onSaved();
     } catch (err) { toast.error(err.response?.data?.message || 'Failed'); }
@@ -70,7 +70,7 @@ export default function AdminBookings() {
   const fetchBookings = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/bookings', { params: { status: statusFilter, limit: 50 } });
+      const { data } = await api.get('/api/bookings', { params: { status: statusFilter, limit: 50 } });
       setBookings(data.bookings);
       setTotal(data.total);
     } catch { toast.error('Failed to load bookings'); }
@@ -164,7 +164,7 @@ export default function AdminBookings() {
                           style={{ marginLeft: '6px' }}
                           onClick={async () => {
                             try {
-                              await api.patch(`/bookings/${b._id}/status`, { status: 'completed' });
+                              await api.patch(`/api/bookings/${b._id}/status`, { status: 'completed' });
                               toast.success('Marked complete');
                               fetchBookings();
                             } catch { toast.error('Failed'); }

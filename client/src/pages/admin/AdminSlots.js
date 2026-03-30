@@ -21,10 +21,10 @@ function SlotModal({ slot, hospitals, onClose, onSaved }) {
     setLoading(true);
     try {
       if (isEdit) {
-        await api.put(`/slots/${slot._id}`, form);
+        await api.put(`/api/slots/${slot._id}`, form);
         toast.success('Slot updated');
       } else {
-        await api.post('/slots', form);
+        await api.post('/api/slots', form);
         toast.success('Slot created');
       }
       onSaved();
@@ -91,8 +91,8 @@ export default function AdminSlots() {
     setLoading(true);
     try {
       const [slotsRes, hospRes] = await Promise.all([
-        api.get('/slots', { params: { hospitalId: hospitalFilter, date: dateFilter } }),
-        api.get('/hospitals', { params: { limit: 100 } }),
+        api.get('/api/slots', { params: { hospitalId: hospitalFilter, date: dateFilter } }),
+        api.get('/api/hospitals', { params: { limit: 100 } }),
       ]);
       setSlots(slotsRes.data.slots);
       setHospitals(hospRes.data.hospitals);
@@ -105,7 +105,7 @@ export default function AdminSlots() {
   const deleteSlot = async (id) => {
     if (!window.confirm('Delete this slot?')) return;
     try {
-      await api.delete(`/slots/${id}`);
+      await api.delete(`/api/slots/${id}`);
       toast.success('Slot deleted');
       fetchAll();
     } catch { toast.error('Failed'); }

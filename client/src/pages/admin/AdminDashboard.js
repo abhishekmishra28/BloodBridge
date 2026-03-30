@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/admin/dashboard')
+    api.get('/api/admin/dashboard')
       .then(r => setData(r.data.data))
       .catch(() => toast.error('Failed to load dashboard'))
       .finally(() => setLoading(false));

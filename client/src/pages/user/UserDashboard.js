@@ -12,8 +12,8 @@ export default function UserDashboard() {
 
   useEffect(() => {
     Promise.all([
-      api.get('/bookings/my'),
-      api.get('/requests/my'),
+      api.get('/api/bookings/my'),
+      api.get('/api/requests/my'),
     ]).then(([b, r]) => {
       setBookings(b.data.bookings.slice(0, 3));
       setRequests(r.data.requests.slice(0, 3));

@@ -14,7 +14,7 @@ export default function AdminUsers() {
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/admin/users', { params: { search, status: statusFilter, limit: 50 } });
+      const { data } = await api.get('/api/admin/users', { params: { search, status: statusFilter, limit: 50 } });
       setUsers(data.users);
       setTotal(data.total);
     } catch { toast.error('Failed to load users'); }
@@ -26,7 +26,7 @@ export default function AdminUsers() {
   const updateStatus = async (id, status) => {
     setActionLoading(id + status);
     try {
-      await api.patch(`/admin/users/${id}/status`, { status });
+      await api.patch(`/api/admin/users/${id}/status`, { status });
       toast.success(`User ${status}`);
       fetchUsers();
     } catch (err) { toast.error(err.response?.data?.message || 'Failed'); }
@@ -37,7 +37,7 @@ export default function AdminUsers() {
     if (!window.confirm(`Delete ${name}? This cannot be undone.`)) return;
     setActionLoading(id + 'del');
     try {
-      await api.delete(`/admin/users/${id}`);
+      await api.delete(`/api/admin/users/${id}`);
       toast.success('User deleted');
       fetchUsers();
     } catch { toast.error('Failed to delete'); }

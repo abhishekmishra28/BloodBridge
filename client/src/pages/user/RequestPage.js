@@ -14,7 +14,7 @@ export default function RequestPage() {
 
   const fetchRequests = async () => {
     try {
-      const { data } = await api.get('/requests/my');
+      const { data } = await api.get('/api/requests/my');
       setRequests(data.requests);
     } catch {}
   };
@@ -31,7 +31,7 @@ export default function RequestPage() {
     }
     setLoading(true);
     try {
-      await api.post('/requests', form);
+      await api.post('/api/requests', form);
       toast.success('Blood request submitted successfully!');
       setForm({ ...EMPTY_FORM, city: user?.city || '', contactPhone: user?.phone || '' });
       fetchRequests();

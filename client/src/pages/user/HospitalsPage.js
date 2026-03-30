@@ -13,7 +13,7 @@ function BookSlotModal({ hospital, onClose, onBooked }) {
   const [slotsLoading, setSlotsLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/slots', { params: { hospitalId: hospital._id } })
+    api.get('/api/slots', { params: { hospitalId: hospital._id } })
       .then(r => setSlots(r.data.slots.filter(s => s.availableSpots > 0)))
       .finally(() => setSlotsLoading(false));
   }, [hospital._id]);
@@ -22,7 +22,7 @@ function BookSlotModal({ hospital, onClose, onBooked }) {
     if (!selectedSlot) { toast.error('Select a slot'); return; }
     setLoading(true);
     try {
-      await api.post('/bookings', { slotId: selectedSlot._id, bloodGroup });
+      await api.post('/api/bookings', { slotId: selectedSlot._id, bloodGroup });
       toast.success('Slot booked! Awaiting approval 🎉');
       onBooked();
     } catch (err) { toast.error(err.response?.data?.message || 'Booking failed'); }
@@ -104,7 +104,7 @@ export default function HospitalsPage() {
   const fetchHospitals = async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/hospitals', { params: { city, limit: 100 } });
+      const { data } = await api.get('/api/hospitals', { params: { city, limit: 100 } });
       setHospitals(data.hospitals);
     } catch { toast.error('Failed to load hospitals'); }
     finally { setLoading(false); }
