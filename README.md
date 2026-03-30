@@ -1,8 +1,8 @@
-<p align="center">
-  <img src="client/public/logo.png" alt="BloodBridge Logo" width="80"/>
-</p>
 
-<h1 align="center">BloodBridge — Blood Donation Management System</h1>
+
+# <p align="center">
+  <img src="client/public/logo.png" alt="BloodBridge Logo" width="80"/>
+</p> BloodBridge — Blood Donation Management System
 
 A full-stack MERN application connecting blood donors, recipients, and hospitals across India.
 
