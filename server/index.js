@@ -12,6 +12,10 @@ app.get("/", (req, res) => {
   res.send("BloodBridge API Running 🚀");
 });
 
+app.get("/test", (req, res) => {
+  res.send("Test route working");
+});
+
 // ── Middleware ──────────────────────────────────────────────────────────────
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
