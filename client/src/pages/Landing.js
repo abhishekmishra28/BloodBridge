@@ -29,15 +29,31 @@ export default function Landing() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '32px', height: '32px',
-            background: 'linear-gradient(135deg, #c0392b, #e63946)',
-            borderRadius: '8px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          
+          {/* Logo Image */}
+          <img 
+            src="/logo.png" 
+            alt="logo"
+            style={{
+              width: '60px',
+              height: '60px',
+              objectFit: 'contain'
+            }}
+          />
+
+          {/* Styled Name */}
+          <span style={{
+            fontFamily: 'Sora, sans-serif',
+            fontWeight: 800,
             fontSize: '18px',
-          }}>🩸</div>
-          <span style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '18px' }}>BloodBridge</span>
+            letterSpacing: '0.5px'
+          }}>
+            <span style={{ color: '#e63946' }}>BLOOD</span>
+            <span style={{ color: '#ffffff' }}>BRIDGE</span>
+          </span>
+
         </div>
+
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           <Link to="/auth" className="btn btn-ghost btn-sm">Log In</Link>
           <Link to="/auth?register=1" className="btn btn-primary btn-sm">Register</Link>
@@ -46,6 +62,19 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="landing-hero">
+        <img
+          src="/logo.png"
+          alt="logo"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '300px',
+            opacity: 0.08,
+            pointerEvents: 'none',
+          }}
+        />
         <div className="hero-eyebrow">🇮🇳 India's Blood Donation Network</div>
         <h1 className="hero-title">
           Every Drop Counts.<br />
@@ -119,7 +148,15 @@ export default function Landing() {
         fontSize: '14px',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
-          <span style={{ fontSize: '20px' }}>🩸</span>
+          <img
+            src="/logo.png"
+            alt="logo"
+            style={{
+              width: '24px',
+              height: '24px',
+              objectFit: 'contain'
+            }}
+          />
           <span style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '16px', color: 'var(--text-secondary)' }}>BloodBridge</span>
         </div>
         <p>© 2024 BloodBridge — Connecting donors, saving lives across India.</p>

@@ -48,7 +48,15 @@ export default function AuthPage() {
     <div className="auth-page">
       <div className="auth-card fade-in">
         <div className="auth-logo">
-          <div style={{ fontSize: '42px' }}>🩸</div>
+          <img
+            src="/logo.png"
+            alt="logo"
+            style={{
+              width: '70px',
+              height: '70px',
+              objectFit: 'contain'
+            }}
+          />
           <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '20px', color: 'var(--text-primary)', marginTop: '6px' }}>
             BloodBridge
           </div>
